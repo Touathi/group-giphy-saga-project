@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import SearchView from "../SearchView/SeachView.jsx";
 import FavView from "../FavView/FavView.jsx";
+import SeachView from '../SearchView/SeachView.jsx';
 
 
 

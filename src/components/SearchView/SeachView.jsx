@@ -1,10 +1,16 @@
 import {useState} from 'react';
+import SearchItem from './SearchItem/SearchItem';
+import React, { useEffect} from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import axios from 'axios';
 
 
 
 function SeachView() {
     
     const [input, setInput] = useState(String);
+    const dispatch = useDispatch();
+    const getPic = useSelector(store => store.getGiffy)
 
     const handleChange = (e) => {
         setInput(e);
@@ -13,6 +19,17 @@ function SeachView() {
     const handleSubmit = (event) => {
         event.preventDefault();
     }
+
+//Rendering Getpic in the DOM
+
+const getPictures = () => {
+    dispatch({type:'GET_GIFFY'})
+}
+useEffect ( () => {
+getPictures();
+}, [])
+
+console.log(getPic);
 
 return (
         <>
@@ -25,6 +42,12 @@ return (
                        onChange={(e) => handleChange(e.target.value)}
                         />
             </form>
+
+            {getPic.length ?getPic.map((img, i) => (
+            <SearchItem key={i}img ={img}/>
+        )) :<p>Hello</p>} 
+
+            
 
 
 

@@ -2,9 +2,11 @@ const express = require('express');
 const pool = require('../modules/pool');
 
 const router = express.Router();
+require('dotenv').config();
 
 router.get('/', (req, res) => {
   // return all categories
+  
   const queryText = `SELECT * FROM category ORDER BY name ASC`;
   pool
     .query(queryText)
