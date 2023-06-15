@@ -1,4 +1,5 @@
 import {useState} from 'react';
+import SearchItem from './SearchItem/SearchItem';
 
 
 
@@ -25,6 +26,7 @@ return (
                        onChange={(e) => handleChange(e.target.value)}
                         />
             </form>
+            <SearchItem/>
 
 
 

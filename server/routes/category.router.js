@@ -6,8 +6,7 @@ require('dotenv').config();
 
 router.get('/', (req, res) => {
   // return all categories
-  axios.get(`http://api.giphy.com/v1/gifs/search?api_key=${process.env.GIPHY_API_KEY}&q=pizza&limit=20`)
-
+  
   const queryText = `SELECT * FROM category ORDER BY name ASC`;
   pool
     .query(queryText)

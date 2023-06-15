@@ -9,11 +9,11 @@ import { takeLatest, put } from 'redux-saga/effects';
 import axios from 'axios';
 
 
-//Reducer
+// getGiify Reducer
 
 const getGiffy = (state = [], action) => {
    switch(action.type)  {
-    case 'GET_GIFFY':
+    case 'SET_GIFFY':
       return action.payload;
         default:
             return state;
@@ -28,7 +28,10 @@ const sagaMiddleware = createSagaMiddleware();
 function* rootSaga() {
   yield takeLatest('GET_FAV_PIC', getFavPic)
 
+  yield takeLatest('GET_GIFFY',getPic )
+
 }
+
 
 // favPic Reducer
 const favPic = (state = [], action) => {
@@ -51,7 +54,15 @@ try {
   }
 }
 
-
+function* getPic () {
+    try{
+        const getPicResponse = yield axios.get('/api/search')
+        yield put ({ type:'SET_GIFFY', payload:getPicResponse.data})
+    }
+    catch(error) {
+        console.log('error getting giffy', error);
+    }
+}
 
 
 
