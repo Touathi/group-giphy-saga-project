@@ -8,7 +8,7 @@ const router = express.Router();
 // return all favorite images
 router.get('/', (req, res) => {
   console.log('favorite get images');
-  const queryText = 'SELECT * FROM "favorite";'
+  const queryText = `SELECT * FROM "favorite";`
   pool.query(queryText)
     .then( result => {
       res.send(result.rows)
@@ -19,17 +19,20 @@ router.get('/', (req, res) => {
     })
 });
 
-// // add a new favorite
-// router.post('/', (req, res) => {
 
-//   res.sendStatus(200);
-// });
+
+// add a new favorite
+router.post('/', (req, res) => {
+  
+  res.sendStatus(200);
+});
 
 // update given favorite with a category id
 router.put('/:favId', (req, res) => {
   // req.body
   idToSetCategory = req.body.id
   categoryToSet = req.body.category_id
+
   console.log(idToSetCategory);
   console.log(categoryToSet);
   
@@ -41,7 +44,7 @@ router.put('/:favId', (req, res) => {
     `
  pool.query(queryText, categoryId)
   .then( result => {
-    console.log(`Updated giphy category id to ${categoryToSet}`);
+    console.log(`Updated/Set giphy id ${idToSetCategory} category id to ${categoryToSet}`);
     res.send(200)
   })
   .catch(error => {
