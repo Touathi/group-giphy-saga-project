@@ -18,15 +18,36 @@ router.get('/', (req, res) => {
     })
 });
 
-// add a new favorite
-router.post('/', (req, res) => {
-  res.sendStatus(200);
-});
+// // add a new favorite
+// router.post('/', (req, res) => {
+
+//   res.sendStatus(200);
+// });
 
 // update given favorite with a category id
 router.put('/:favId', (req, res) => {
+  // req.body
+  idToSetCategory = req.body.id
+  categoryToSet = req.body.category_id
+  console.log(idToSetCategory);
+  console.log(categoryToSet);
+  
+  categoryId = [ categoryToSet ]
+  const queryText = `
+    UPDATE "favorite" 
+    SET "category_id" = $1
+    WHERE "id" = ${idToSetCategory};
+    `
+ pool.query(queryText, categoryId)
+  .then( result => {
+    console.log(`Updated giphy category id to ${categoryToSet}`);
+    res.send(200)
+  })
+  .catch(error => {
+    console.log('Error in updating category id', error);
+    res.sendStatus(500)
+  })
   // req.body should contain a category_id to add to this favorite image
-  res.sendStatus(200);
 });
 
 // delete a favorite

@@ -27,6 +27,7 @@ const sagaMiddleware = createSagaMiddleware();
 
 function* rootSaga() {
   yield takeLatest('GET_FAV_PIC', getFavPic)
+  yield takeLatest('PUT_CATEGORY', putCategory)
 
   yield takeLatest('GET_GIFFY',getPic )
 
@@ -43,7 +44,7 @@ const favPic = (state = [], action) => {
   }
 }
 
-
+// Get FAV PIC
 function* getFavPic() {
 try {
     const favPicResponse = yield axios.get('api/favorite')
@@ -54,6 +55,7 @@ try {
   }
 }
 
+
 function* getPic () {
     try{
         const getPicResponse = yield axios.get('/api/search')
@@ -63,6 +65,19 @@ function* getPic () {
         console.log('error getting giffy', error);
     }
 }
+
+function* putCategory(action) {
+  try {
+    yield axios.put(`/api/favorite/${action.payload.id}`, action.payload )
+    yield put ( { type: 'GET_FAV_PIC' } )
+  }
+  catch(error) {
+  }
+  console.log(action.payload);
+}
+
+
+
 
 
 
