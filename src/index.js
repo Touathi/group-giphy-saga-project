@@ -28,8 +28,7 @@ const sagaMiddleware = createSagaMiddleware();
 function* rootSaga() {
   yield takeLatest('GET_FAV_PIC', getFavPic)
   yield takeLatest('PUT_CATEGORY', putCategory)
-
-  yield takeLatest('GET_GIFFY',getPic )
+  yield takeLatest('GET_GIFFY',getPic)
 
 }
 
@@ -42,14 +41,6 @@ const favPic = (state = [], action) => {
       default:
           return state;
   }
-}
-
-// favPic category Reducer
-const favPicCategory = (state = [], action) => {
-  if ( action.type === 'SET_CATEGORY') {
-    return action.payload
-  }
-  return state;
 }
 
 // Get FAV PIC
