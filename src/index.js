@@ -59,7 +59,7 @@ try {
 function* getPic () {
     try{
         const getPicResponse = yield axios.get('/api/search')
-        yield put ({ type:'SET_GIFFY', payload:getPicResponse.data})
+        yield put ({ type:'SET_GIFFY', payload:getPicResponse.data.data})
     }
     catch(error) {
         console.log('error getting giffy', error);
@@ -108,7 +108,8 @@ function* putCategory(action) {
 
 const store = createStore(
     combineReducers({
-      favPic
+      favPic,
+      getGiffy
     }),
     applyMiddleware(sagaMiddleware, logger),
 );
