@@ -6,21 +6,23 @@ import FavView from "../FavView/FavView.jsx";
 
 
 
-function App(props) {
+function App() {
   return (
-    <div>
-      <h1>Giphy Search!</h1>
-
-            <Router>
-
-                <Route exact path='/search'>
+        <Router>
+            <div>
+              <h1>Giphy Search!</h1>
+              <nav>
+                <Link to="/">Search</Link>
+                <Link to="/favView">Favorites</Link>
+              </nav>
+                <Route exact path='/'>
                     <SearchView/>   
                 </Route>
                 <Route exact path="/favView">
                     <FavView/>
                 </Route>
-            </Router>
-    </div>
+            </div>
+        </Router>
   );
 }
 
