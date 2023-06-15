@@ -1,25 +1,36 @@
-import React, { useEffect } from 'react';
+
 import { useDispatch, useSelector} from 'react-redux';
-import axios from 'axios';
+import { useState } from 'react'
 
 function Favpic({img}) {
+
+
+    const favPicCategory = useSelector(store => store.favPicCategory)
 
     const dispatch = useDispatch();
    
     const setCategory = (id) => {
-
         console.log(id);
-        
         dispatch( { type: 'PUT_CATEGORY', payload: {id: img.id, category_id: id}})
-        
+
     }
 
+    const renderCategory = (id) => {
+        if (id === 1) {
+            setNewCategory('1')
+        }
+        console.log(NewCategory);
+        dispatch( { type: 'SET_CATEGORY', payload: NewCategory})
+    }
+    console.log(favPicCategory);
 
     return (
         <>
+            
+            
             <div>      
                 <img src={img.giphy_url} ></img>
-                
+
             </div>
             <div onSubmit={setCategory}>
                 <p>Set Category</p>

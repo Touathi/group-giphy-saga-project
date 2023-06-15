@@ -27,6 +27,14 @@ const favPic = (state = [], action) => {
   }
 }
 
+// favPic category Reducer
+const favPicCategory = (state = [], action) => {
+  if ( action.type === 'SET_CATEGORY') {
+    return action.payload
+  }
+  return state;
+}
+
 // Get FAV PIC
 function* getFavPic() {
 try {
@@ -79,7 +87,8 @@ function* putCategory(action) {
 
 const store = createStore(
     combineReducers({
-      favPic
+      favPic,
+      favPicCategory
     }),
     applyMiddleware(sagaMiddleware, logger),
 );

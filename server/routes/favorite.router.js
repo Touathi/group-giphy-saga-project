@@ -18,11 +18,11 @@ router.get('/', (req, res) => {
     })
 });
 
-// // add a new favorite
-// router.post('/', (req, res) => {
+// add a new favorite
+router.post('/', (req, res) => {
 
-//   res.sendStatus(200);
-// });
+  res.sendStatus(200);
+});
 
 // update given favorite with a category id
 router.put('/:favId', (req, res) => {
@@ -40,7 +40,7 @@ router.put('/:favId', (req, res) => {
     `
  pool.query(queryText, categoryId)
   .then( result => {
-    console.log(`Updated giphy category id to ${categoryToSet}`);
+    console.log(`Updated/Set giphy id ${idToSetCategory} category id to ${categoryToSet}`);
     res.send(200)
   })
   .catch(error => {
