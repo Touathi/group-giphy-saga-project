@@ -8,6 +8,20 @@ import createSagaMiddleware from 'redux-saga';
 import { takeLatest, put } from 'redux-saga/effects';
 import axios from 'axios';
 
+
+// getGiify Reducer
+
+const getGiffy = (state = [], action) => {
+   switch(action.type)  {
+    case 'SET_GIFFY':
+      return action.payload;
+        default:
+            return state;
+   }
+}
+
+
+
 const sagaMiddleware = createSagaMiddleware();
 
 
@@ -15,7 +29,10 @@ function* rootSaga() {
   yield takeLatest('GET_FAV_PIC', getFavPic)
   yield takeLatest('PUT_CATEGORY', putCategory)
 
+  yield takeLatest('GET_GIFFY',getPic )
+
 }
+
 
 // favPic Reducer
 const favPic = (state = [], action) => {
@@ -36,6 +53,17 @@ try {
   catch( err ) {
     console.log(`Error in getting fav pic`);
   }
+}
+
+
+function* getPic () {
+    try{
+        const getPicResponse = yield axios.get('/api/search')
+        yield put ({ type:'SET_GIFFY', payload:getPicResponse.data.data})
+    }
+    catch(error) {
+        console.log('error getting giffy', error);
+    }
 }
 
 function* putCategory(action) {
@@ -77,9 +105,11 @@ function* putCategory(action) {
 
 
 
+
 const store = createStore(
     combineReducers({
-      favPic
+      favPic,
+      getGiffy
     }),
     applyMiddleware(sagaMiddleware, logger),
 );
