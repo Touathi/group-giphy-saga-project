@@ -18,12 +18,18 @@ function SeachView() {
     
     const handleSubmit = (event) => {
         event.preventDefault();
+
+        dispatch({
+            type:'GET_GIFFY',
+            payload: input
+            
+    })
     }
 
 //Rendering Getpic in the DOM
 
 const getPictures = () => {
-    dispatch({type:'GET_GIFFY'})
+  
 }
 useEffect ( () => {
 getPictures();
@@ -41,7 +47,9 @@ return (
                        value={input}
                        onChange={(e) => handleChange(e.target.value)}
                         />
+                        <button onClick={handleSubmit}>Search</button>
             </form>
+
 
             {getPic.length ?getPic.map((img, i) => (
             <SearchItem key={i}img ={img}/>

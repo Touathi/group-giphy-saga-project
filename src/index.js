@@ -28,8 +28,8 @@ const sagaMiddleware = createSagaMiddleware();
 function* rootSaga() {
   yield takeLatest('GET_FAV_PIC', getFavPic)
   yield takeLatest('PUT_CATEGORY', putCategory)
-  yield takeLatest('GET_GIFFY',getPic)
-
+  yield takeLatest('GET_GIFFY',getPic )
+  yield takeLatest('LIKE_PIC', likePost)
 }
 
 
@@ -52,13 +52,16 @@ try {
   catch( err ) {
     console.log(`Error in getting fav pic`);
   }
+
 }
 
 
-function* getPic () {
+function* getPic (action) {
+    console.log(action);
     try{
-        const getPicResponse = yield axios.get('/api/search')
+        const getPicResponse = yield axios.get(`/api/search/${action.payload}`)
         yield put ({ type:'SET_GIFFY', payload:getPicResponse.data.data})
+
     }
     catch(error) {
         console.log('error getting giffy', error);
@@ -75,7 +78,17 @@ function* putCategory(action) {
   console.log(action.payload);
 }
 
+// Post Genarator Function
 
+function* likePost (action) {
+    try{
+        yield axios.post(`/api/favorite`, action.payload)
+      
+    }
+    catch(error) {
+    }
+    console.log(action.payload);
+}
 
 
 
