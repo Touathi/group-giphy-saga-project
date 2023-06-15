@@ -28,10 +28,8 @@ const sagaMiddleware = createSagaMiddleware();
 function* rootSaga() {
   yield takeLatest('GET_FAV_PIC', getFavPic)
   yield takeLatest('PUT_CATEGORY', putCategory)
-
   yield takeLatest('GET_GIFFY',getPic )
   yield takeLatest('LIKE_PIC', likePost)
-
 }
 
 

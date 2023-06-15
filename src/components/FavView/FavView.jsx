@@ -11,10 +11,13 @@ function FavView() {
     const getFavPics = () => {
         dispatch( {type: 'GET_FAV_PIC' })
     }
+
+ 
   
     useEffect( () => {
         getFavPics()
     }, [])
+
     
     return(
         <>
