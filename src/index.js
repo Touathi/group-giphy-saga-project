@@ -39,7 +39,7 @@ try {
 }
 
 function* putCategory(action) {
-  try {.
+  try {
     yield axios.put(`/api/favorite/${action.payload.id}`, action.payload )
     yield put ( { type: 'GET_FAV_PIC' } )
   }
