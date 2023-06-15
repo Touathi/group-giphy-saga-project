@@ -1,11 +1,21 @@
 const express = require('express');
 const pool = require('../modules/pool');
+const axios = require('axios')
+require('dotenv').config();
 
 const router = express.Router();
 
 // return all favorite images
 router.get('/', (req, res) => {
-  res.sendStatus(200);
+  const queryText = 'SELECT * FROM "favorite";'
+  pool.query(queryText)
+    .then( result => {
+      res.send(result.rows)
+    })
+    .catch(err => {
+      console.log(`Error in getting favorites ${err}`);
+      res.sendStatus(500);
+    })
 });
 
 // add a new favorite
