@@ -19,11 +19,24 @@ router.get('/', (req, res) => {
     })
 });
 
-// // add a new favorite
-// router.post('/', (req, res) => {
+// add a new favorite
+router.post('/', (req, res) => {
+  console.log(req.body);
 
-//   res.sendStatus(200);
-// });
+  
+const queryText = ` INSERT INTO "favorite" ("giphy_name", "giphy_url")
+  VALUES($1, $2)
+`
+pool.query(queryText, [req.body.title, req.body.url])
+.then(result => {
+  res.sendStatus(200);
+})
+.catch(error => {
+  console.log('error posting', error);
+  res.sendStatus(500)
+})
+
+});
 
 // update given favorite with a category id
 router.put('/:favId', (req, res) => {
