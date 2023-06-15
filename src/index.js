@@ -8,6 +8,20 @@ import createSagaMiddleware from 'redux-saga';
 import { takeLatest, put } from 'redux-saga/effects';
 import axios from 'axios';
 
+
+//Reducer
+
+const getGiffy = (state = [], action) => {
+   switch(action.type)  {
+    case 'GET_GIFFY':
+      return action.payload;
+        default:
+            return state;
+   }
+}
+
+
+
 const sagaMiddleware = createSagaMiddleware();
 
 function* rootSaga() {
