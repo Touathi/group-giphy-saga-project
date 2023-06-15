@@ -10,11 +10,31 @@ import axios from 'axios';
 
 const sagaMiddleware = createSagaMiddleware();
 
+
 function* rootSaga() {
+  yield takeLatest('GET_FAV_PIC', getFavPic)
+
+}
+
+// favPic Reducer
+const favPic = (state = [], action) => {
+  switch (action.type) {
+      case 'SET_FAV_PIC':
+          return action.payload;
+      default:
+          return state;
+  }
+}
 
 
-
-
+function* getFavPic() {
+try {
+    const favPicResponse = yield axios.get('api/favorite')
+    yield put ( {type:'SET_FAV_PIC', payload: favPicResponse.data})
+  }
+  catch( err ) {
+    console.log(`Error in getting fav pic`);
+  }
 }
 
 
@@ -46,13 +66,10 @@ function* rootSaga() {
 
 
 
-
-
-
-
-
 const store = createStore(
-    combineReducers({}),
+    combineReducers({
+      favPic
+    }),
     applyMiddleware(sagaMiddleware, logger),
 );
 
