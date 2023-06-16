@@ -64,8 +64,17 @@ router.put('/:favId', (req, res) => {
 });
 
 // delete a favorite
-router.delete('/', (req, res) => {
-  res.sendStatus(200);
+router.delete('/:id', (req, res) => {
+  const queryText = `DELETE FROM "favorite" WHERE "id"=$1`
+  pool.query(queryText,[req.params.id/1])
+  .then(() => {
+    res.sendStatus(200);
+  })
+  .catch(error => {
+    console.log('error deleting picture', error);
+    res.sendStatus(200);
+  })
+  
 });
 
 module.exports = router;

@@ -26,6 +26,8 @@ function Favpic({img}) {
                 <button onClick={(event) => setCategory('3')}>Cartoon</button>
                 <button onClick={(event) => setCategory('4')}>Nsfw</button>
                 <button onClick={(event) => setCategory('5')}>Meme</button>
+                <button onClick={() => dispatch({type:'DELETE_PIC', payload:img.id})}>Delete</button>
+
             </div>
             <div>
                 <p>Category: {img.category_id} </p>
