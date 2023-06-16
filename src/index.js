@@ -30,6 +30,7 @@ function* rootSaga() {
   yield takeLatest('PUT_CATEGORY', putCategory)
   yield takeLatest('GET_GIFFY',getPic )
   yield takeLatest('LIKE_PIC', likePost)
+ yield takeLatest('DELETE_PIC', deletePicture )
 }
 
 
@@ -91,8 +92,17 @@ function* likePost (action) {
 }
 
 
+//Delete Generator
 
-
+function* deletePicture (action) {
+    try {
+        yield axios.delete(`/api/favorite/${action.payload}`)
+        yield put ({type:'GET_FAV_PIC'})
+    }
+    catch(error) {
+        console.log('Error Deleting picture');
+    }
+}
 
 
 

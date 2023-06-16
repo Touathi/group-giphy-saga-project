@@ -21,7 +21,7 @@ return (
 <div>
     <img src={img.images.original.url}></img>
     <button onClick={handleLike}>Like</button>
-
+   
     </div>
 
 )
